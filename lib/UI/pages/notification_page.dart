@@ -1,5 +1,5 @@
-import 'package:expensetracker/utils/colors.dart';
-import 'package:expensetracker/utils/styles.dart';
+import 'package:expensetracker/UI/widgets/re-usable/colors.dart';
+import 'package:expensetracker/UI/widgets/re-usable/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 

@@ -1,5 +1,5 @@
 import 'package:expensetracker/UI/pages/navigation_page.dart';
-import 'package:expensetracker/utils/styles.dart';
+import 'package:expensetracker/UI/widgets/re-usable/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

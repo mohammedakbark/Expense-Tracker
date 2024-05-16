@@ -6,9 +6,9 @@ import 'package:expensetracker/UI/pages/notification_page.dart';
 import 'package:expensetracker/UI/pages/tabs/home_tab.dart';
 import 'package:expensetracker/UI/pages/tabs/expence_view_tab.dart';
 import 'package:expensetracker/UI/widgets/bottomnavigation.dart';
-import 'package:expensetracker/utils/colors.dart';
-import 'package:expensetracker/utils/responsive_helper.dart';
-import 'package:expensetracker/utils/styles.dart';
+import 'package:expensetracker/UI/widgets/re-usable/colors.dart';
+import 'package:expensetracker/UI/widgets/re-usable/responsive_helper.dart';
+import 'package:expensetracker/UI/widgets/re-usable/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +28,8 @@ class NavigationPage extends StatelessWidget {
         backgroundColor: ColoR.darkGreen,
         shape: const CircleBorder(),
         onPressed: () {
+          Provider.of<Controller>(context, listen: false).selectedDate =
+              DateTime.now();
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => AddExpense(),
           ));

@@ -1,10 +1,11 @@
 import 'dart:developer';
 
 import 'package:easy_date_timeline/easy_date_timeline.dart';
-import 'package:expensetracker/Data/controller.dart';
-import 'package:expensetracker/utils/colors.dart';
-import 'package:expensetracker/utils/responsive_helper.dart';
-import 'package:expensetracker/utils/styles.dart';
+import 'package:expensetracker/Data/db_controller.dart';
+import 'package:expensetracker/UI/controller/controller.dart';
+import 'package:expensetracker/UI/widgets/re-usable/colors.dart';
+import 'package:expensetracker/UI/widgets/re-usable/responsive_helper.dart';
+import 'package:expensetracker/UI/widgets/re-usable/styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -53,7 +54,7 @@ class ExpenseViewTab extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return InkWell(
                                     onTap: () {
-                                      log(expenseCategory[index]);
+                                      log(Controller.expenseCategory[index]);
                                       Navigator.of(context).pop();
                                     },
                                     child: Row(
@@ -63,7 +64,7 @@ class ExpenseViewTab extends StatelessWidget {
                                           width: 15,
                                         ),
                                         Text(
-                                          expenseCategory[index],
+                                       Controller.   expenseCategory[index],
                                           style: CustomeTextStyle.poppinsStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w600),
@@ -74,7 +75,7 @@ class ExpenseViewTab extends StatelessWidget {
                                 },
                                 separatorBuilder: (context, index) =>
                                     const Divider(),
-                                itemCount: expenseCategory.length),
+                                itemCount:Controller. expenseCategory.length),
                           ),
                         ),
                       );
