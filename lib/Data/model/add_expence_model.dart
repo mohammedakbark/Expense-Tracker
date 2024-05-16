@@ -4,7 +4,7 @@ part 'add_expence_model.g.dart';
 @HiveType(typeId: 1)
 class AddExpenceModel {
   @HiveField(0)
-  int ?id;
+  String ?id;
 
   @HiveField(1)
   String category;

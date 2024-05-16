@@ -115,10 +115,10 @@ class AddExpense extends StatelessWidget {
                       selectedCategory = selected!;
                     }),
                 SizedBox(
-                  height: Sizer.h(context) * .5,
+                  height: Sizer.h(context) * .6,
                 ),
                 SizedBox(
-                    width: Sizer.w(context),
+                    width: Sizer.w(context) * .7,
                     height: 60,
                     child: Consumer<Controller>(
                         builder: (context, controller, child) {
@@ -130,13 +130,16 @@ class AddExpense extends StatelessWidget {
                             final id = UId.getId(quantityOfRandomString: 3)
                                 .substring(6, 14);
                             log(id);
+                            // log(
+                            //   "${controller.selectedDate!.day}-${controller.selectedDate!.month}-${controller.selectedDate!.year}",
+                            // );
                             // Provider.of<DBController>(context, listen: false)
                             //     .clearBox();
                             if (_formKey.currentState!.validate() &&
                                 controller.selectedDate != null) {
                               Provider.of<DBController>(context, listen: false)
                                   .storeExpense(AddExpenceModel(
-                                id: int.parse(id),
+                                id: id,
                                 amount: double.parse(amountController.text),
                                 category: selectedCategory,
                                 date:

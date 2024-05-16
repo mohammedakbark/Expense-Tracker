@@ -43,6 +43,7 @@ dependencies:
   hive_flutter: ^1.1.0
   cherry_toast: ^1.10.1
   uid: ^0.0.2
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
@@ -70,8 +71,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
-  #   - images/a_dot_ham.jpeg
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

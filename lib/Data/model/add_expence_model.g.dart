@@ -21,7 +21,7 @@ class AddExpenceModelAdapter extends TypeAdapter<AddExpenceModel> {
       category: fields[1] as String,
       date: fields[4] as String,
       description: fields[3] as String,
-      id: fields[0] as int?,
+      id: fields[0] as String?,
     );
   }
 

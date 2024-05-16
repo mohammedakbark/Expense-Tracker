@@ -31,15 +31,19 @@ class HomeTransactions extends StatelessWidget {
                       : ListView.separated(
                           itemBuilder: (context, index) {
                             return ListTile(
-                              leading: Controller()
-                                  .selectImage(data[index].category),
+                              leading: CircleAvatar(
+                                  maxRadius: 30,
+                                  backgroundColor: Controller()
+                                      .bgColor(data[index].category),
+                                  child: Controller()
+                                      .selectImage(data[index].category)),
                               title: Text(
-                                data[index].description,
+                                data[index].category,
                                 style: const TextStyle(
                                     fontSize: 19, fontWeight: FontWeight.w600),
                               ),
                               subtitle: Text(
-                                data[index].date,
+                                data[index].description,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                 ),

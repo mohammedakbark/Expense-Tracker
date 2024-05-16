@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:expensetracker/UI/widgets/re-usable/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -9,16 +11,18 @@ class Controller with ChangeNotifier {
     "Cloth",
     "Recharge",
     "Loan/EMI",
+    "Travel",
     "Other"
   ];
-   final List<String> _expenseCategoryImages = [
-    "assets/images/fuel.png",
-    "assets/images/grocery.png",
-    "assets/images/food.png",
-    "assets/images/cloth.png",
-    "assets/images/recharge.png",
-    "assets/images/loan.png",
-    "assets/images/other.png"
+  final List<String> _expenseCategoryImages = [
+    "assets/fuel.png",
+    "assets/grocery.png",
+    "assets/food.png",
+    "assets/cloth.png",
+    "assets/recharge.png",
+    "assets/loan.png",
+    "assets/travel.png",
+    "assets/other.png"
   ];
 
   selectImage(
@@ -67,12 +71,58 @@ class Controller with ChangeNotifier {
             color: ColoR.white,
           );
         }
-      case "Other":
+      case "Travel":
         {
           return Image.asset(
             _expenseCategoryImages[6],
             color: ColoR.white,
           );
+        }
+      case "Other":
+        {
+          return Image.asset(
+            _expenseCategoryImages[7],
+            color: ColoR.white,
+          );
+        }
+    }
+  }
+
+  bgColor(
+    String category,
+  ) {
+    switch (category) {
+      case "Petrol":
+        {
+          return const Color.fromARGB(255, 48, 108, 206);
+        }
+      case "Grocey":
+        {
+          return const Color.fromARGB(255, 48, 206, 169);
+        }
+      case "Food":
+        {
+          return const Color.fromARGB(255, 174, 48, 206);
+        }
+      case "Cloth":
+        {
+          return const Color.fromARGB(255, 48, 206, 72);
+        }
+      case "Recharge":
+        {
+          return const Color.fromARGB(255, 48, 182, 206);
+        }
+      case "Loan/EMI":
+        {
+          return const Color.fromARGB(255, 203, 206, 48);
+        }
+      case "Travel":
+        {
+          return const Color.fromARGB(255, 48, 206, 140);
+        }
+      case "Other":
+        {
+          return const Color.fromARGB(255, 0, 0, 0);
         }
     }
   }
@@ -91,6 +141,7 @@ class Controller with ChangeNotifier {
   }
 
   changeSelectionDate(DateTime selected) {
+    log(selected.toString());
     selectedDate = selected;
     notifyListeners();
   }

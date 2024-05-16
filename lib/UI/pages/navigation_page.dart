@@ -17,7 +17,7 @@ class NavigationPage extends StatelessWidget {
   NavigationPage({super.key});
   final pages = [
     const HomeTab(),
-    const ExpenseViewTab(),
+     ExpenseViewTab(),
   ];
   @override
   Widget build(BuildContext context) {
