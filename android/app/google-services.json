@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "1081852063375",
+    "project_id": "etracker-856d5",
+    "storage_bucket": "etracker-856d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1081852063375:android:f5c455c6915f46ec2a4afa",
+        "android_client_info": {
+          "package_name": "com.example.expensetracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1081852063375-f8nvoc8sia4aokimm0dleu6u96vns5qi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.expensetracker",
+            "certificate_hash": "710d117250ea06b4271d29fe78a95162f8614c93"
+          }
+        },
+        {
+          "client_id": "1081852063375-2rsa071p8ivifpfu1mficlvvcn88gc7m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgtUbQch14FAIVQAPYQurdokIVex3UNmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1081852063375-2rsa071p8ivifpfu1mficlvvcn88gc7m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1081852063375-c376u3gvl6c8cdkfe1edim8kv5am8brq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.expensetracker"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

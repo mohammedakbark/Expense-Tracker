@@ -19,16 +19,21 @@ class DBController with ChangeNotifier {
     expenceList.clear();
     final expDB = await Hive.openBox<AddExpenceModel>("expence_db");
     expenceList.addAll(expDB.values);
+    expenceList.sort((a, b) {
+      return b.date.compareTo(a.date);
+    });
   }
 
   Future clearBox() async {
     final expenceBox = await Hive.openBox<AddExpenceModel>("expence_db");
     expenceBox.clear();
+    notifyListeners();
   }
 
   Future deleteFromBox(id) async {
     final expenceBox = await Hive.openBox<AddExpenceModel>("expence_db");
     expenceBox.delete(id);
+    newListAfterchange = [];
     notifyListeners();
   }
 
@@ -38,11 +43,12 @@ class DBController with ChangeNotifier {
     if (existingDoc != null) {
       existingDoc = updateObj;
       expenceBox.put(id, existingDoc);
+      newListAfterchange = [];
       notifyListeners();
     }
   }
 
-  //--
+  //-- Show Total -- //
   double totalExpence = 0;
   double todayExpence = 0;
   getTotalExpense() async {
@@ -56,7 +62,7 @@ class DBController with ChangeNotifier {
     for (var i in list) {
       totalExpence += i.amount;
     }
-    //-----day
+//-----day
 
     final today = list.where((element) {
       return element.date
@@ -65,5 +71,39 @@ class DBController with ChangeNotifier {
     for (var i in today) {
       todayExpence += i.amount;
     }
+  }
+
+  //    Filtering and Sorting
+  List<AddExpenceModel> newListAfterchange = [];
+  sortListByDate(bool isAscending) async {
+    newListAfterchange.clear();
+    final expenceBox = await Hive.openBox<AddExpenceModel>("expence_db");
+    newListAfterchange.addAll(expenceBox.values);
+    newListAfterchange.sort((a, b) {
+      return isAscending ? a.date.compareTo(b.date) : b.date.compareTo(a.date);
+    });
+    notifyListeners();
+  }
+
+  dortListByExpence(bool isAscending) async {
+    newListAfterchange.clear();
+    final expenceBox = await Hive.openBox<AddExpenceModel>("expence_db");
+    newListAfterchange.addAll(expenceBox.values);
+    newListAfterchange.sort((a, b) {
+      return isAscending
+          ? a.amount.compareTo(b.amount)
+          : b.amount.compareTo(a.amount);
+    });
+    notifyListeners();
+  }
+
+  filterList(List<String> selected) async {
+    newListAfterchange.clear();
+    final expenceBox = await Hive.openBox<AddExpenceModel>("expence_db");
+    newListAfterchange.addAll(expenceBox.values);
+    newListAfterchange = expenceBox.values
+        .where((element) => selected.contains(element.category))
+        .toList();
+    notifyListeners();
   }
 }

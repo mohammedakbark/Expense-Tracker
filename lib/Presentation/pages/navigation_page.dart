@@ -1,14 +1,13 @@
 import 'dart:developer';
 
-import 'package:expensetracker/UI/controller/controller.dart';
-import 'package:expensetracker/UI/pages/add_expence_page.dart';
-import 'package:expensetracker/UI/pages/notification_page.dart';
-import 'package:expensetracker/UI/pages/tabs/home_tab.dart';
-import 'package:expensetracker/UI/pages/tabs/expence_view_tab.dart';
-import 'package:expensetracker/UI/widgets/bottomnavigation.dart';
-import 'package:expensetracker/UI/widgets/re-usable/colors.dart';
-import 'package:expensetracker/UI/widgets/re-usable/responsive_helper.dart';
-import 'package:expensetracker/UI/widgets/re-usable/styles.dart';
+import 'package:expensetracker/Presentation/controller/controller.dart';
+import 'package:expensetracker/Presentation/pages/add_expence_page.dart';
+import 'package:expensetracker/Presentation/pages/tabs/home_tab.dart';
+import 'package:expensetracker/Presentation/pages/tabs/expence_view_tab.dart';
+import 'package:expensetracker/Presentation/widgets/bottomnavigation.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/colors.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/responsive_helper.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';
 import 'package:provider/provider.dart';
@@ -16,12 +15,13 @@ import 'package:provider/provider.dart';
 class NavigationPage extends StatelessWidget {
   NavigationPage({super.key});
   final pages = [
-    const HomeTab(),
+     HomeTab(),
      ExpenseViewTab(),
   ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       body: pages[Provider.of<Controller>(context, listen: true)
           .selectedBottomNavIndex],
       floatingActionButton: FloatingActionButton(

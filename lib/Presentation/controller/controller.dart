@@ -1,6 +1,7 @@
 import 'dart:developer';
 
-import 'package:expensetracker/UI/widgets/re-usable/colors.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class Controller with ChangeNotifier {
@@ -143,6 +144,29 @@ class Controller with ChangeNotifier {
   changeSelectionDate(DateTime selected) {
     log(selected.toString());
     selectedDate = selected;
+    notifyListeners();
+  }
+
+  int? selectedRadioButton;
+
+  chageRadionValue(selected) {
+    selectedRadioButton = selected;
+    
+    notifyListeners();
+  }
+
+  List<String> selectedForFilter = [];
+  List<bool> isCheckBoxEnabled =
+      List<bool>.filled(expenseCategory.length, false);
+  isCheckBoxSelected(bool value, index, String item) {
+    isCheckBoxEnabled[index] = value;
+    if (value == true) {
+      selectedForFilter.add(item);
+      print(selectedForFilter);
+    } else {
+      selectedForFilter.removeWhere((element) => element == item);
+      print(selectedForFilter);
+    }
     notifyListeners();
   }
 }

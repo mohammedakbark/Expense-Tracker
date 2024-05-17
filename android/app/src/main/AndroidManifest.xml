@@ -1,4 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+<uses-permission android:name="android.permission.VIBRATE" />
+    <application>
+    <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.ActionReceiver" android:exported="true"/>
+    <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.DismissedReceiver" android:exported="true"/>
+    <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.ScheduledNotificationReceiver" android:exported="true"/>
+    <receiver android:name="com.dexterous.flutterlocalnotifications.receivers.BackgroundAlarmReceiver" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="true"/>
+    </application>
     <application
         android:label="expensetracker"
         android:name="${applicationName}"

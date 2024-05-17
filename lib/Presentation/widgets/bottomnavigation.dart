@@ -1,6 +1,6 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
-import 'package:expensetracker/UI/controller/controller.dart';
-import 'package:expensetracker/UI/widgets/re-usable/colors.dart';
+import 'package:expensetracker/Presentation/controller/controller.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:icons_plus/icons_plus.dart';

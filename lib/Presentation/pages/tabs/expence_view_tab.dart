@@ -3,12 +3,13 @@ import 'dart:developer';
 import 'package:easy_date_timeline/easy_date_timeline.dart';
 import 'package:expensetracker/Data/db_controller.dart';
 import 'package:expensetracker/Data/model/add_expence_model.dart';
-import 'package:expensetracker/UI/controller/controller.dart';
-import 'package:expensetracker/UI/widgets/re-usable/colors.dart';
-import 'package:expensetracker/UI/widgets/re-usable/responsive_helper.dart';
-import 'package:expensetracker/UI/widgets/re-usable/styles.dart';
-import 'package:expensetracker/UI/widgets/re-usable/textfield.dart';
-import 'package:expensetracker/UI/widgets/re-usable/toast_message.dart';
+import 'package:expensetracker/Presentation/controller/controller.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/colors.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/empty_data.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/responsive_helper.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/styles.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/textfield.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/toast_message.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -50,41 +51,85 @@ class ExpenseViewTab extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       showModalBottomSheet(
-                        showDragHandle: true,
+                        // showDragHandle: true,
                         context: context,
                         builder: (context) => Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 30),
-                          child: SizedBox(
-                            height: 200,
-                            child: ListView.separated(
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      log(Controller.expenseCategory[index]);
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: Row(
-                                      children: [
-                                        const CircleAvatar(),
-                                        const SizedBox(
-                                          width: 15,
-                                        ),
-                                        Text(
-                                          Controller.expenseCategory[index],
-                                          style: CustomeTextStyle.poppinsStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                },
-                                separatorBuilder: (context, index) =>
-                                    const Divider(),
-                                itemCount: Controller.expenseCategory.length),
-                          ),
-                        ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 30, vertical: 30),
+                            child: SizedBox(
+                              height: Sizer.h(context) * .7,
+                              child: Consumer2<Controller, DBController>(
+                                  builder: (context, radioController,
+                                      dbController, child) {
+                                return SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "SORT BY",
+                                        style: CustomeTextStyle.poppinsStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                      const Divider(),
+                                      Column(
+                                        children: [
+                                          customeRadioButton(
+                                              title: "Newest First",
+                                              value: 0,
+                                              onChanged: (selected) {
+                                                dbController
+                                                    .sortListByDate(false);
+
+                                                radioController
+                                                    .chageRadionValue(selected);
+                                              },
+                                              groupedValue: radioController
+                                                  .selectedRadioButton),
+                                          customeRadioButton(
+                                              title: "Oldest First",
+                                              value: 1,
+                                              onChanged: (selected) {
+                                                dbController
+                                                    .sortListByDate(true);
+
+                                                radioController
+                                                    .chageRadionValue(selected);
+                                              },
+                                              groupedValue: radioController
+                                                  .selectedRadioButton),
+                                          customeRadioButton(
+                                              title: "Expense -- Ascending",
+                                              value: 2,
+                                              onChanged: (selected) {
+                                                dbController
+                                                    .dortListByExpence(true);
+
+                                                radioController
+                                                    .chageRadionValue(selected);
+                                              },
+                                              groupedValue: radioController
+                                                  .selectedRadioButton),
+                                          customeRadioButton(
+                                              title: "Expense -- Discending",
+                                              value: 3,
+                                              onChanged: (selected) {
+                                                dbController
+                                                    .dortListByExpence(false);
+
+                                                radioController
+                                                    .chageRadionValue(selected);
+                                              },
+                                              groupedValue: radioController
+                                                  .selectedRadioButton),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                );
+                              }),
+                            )),
                       );
                     },
                     child: Row(
@@ -100,40 +145,62 @@ class ExpenseViewTab extends StatelessWidget {
                 ElevatedButton(
                     onPressed: () {
                       showModalBottomSheet(
-                        showDragHandle: true,
+                        // showDragHandle: true,
                         context: context,
                         builder: (context) => Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 30, vertical: 30),
                           child: SizedBox(
-                            height: 200,
+                            height: Sizer.h(context) * .8,
                             child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Select date from here",
+                                  "Filters",
                                   style: CustomeTextStyle.poppinsStyle(
                                       fontSize: 18),
                                 ),
-                                EasyDateTimeLine(
-                                  initialDate: DateTime.now(),
-                                  headerProps: EasyHeaderProps(
-                                    monthStyle: CustomeTextStyle.poppinsStyle(),
-                                    selectedDateStyle:
-                                        CustomeTextStyle.poppinsStyle(
-                                            fontWeight: FontWeight.bold),
-                                    monthPickerType: MonthPickerType.switcher,
-                                    showHeader: true,
-                                  ),
-                                  timeLineProps: const EasyTimeLineProps(),
-                                  dayProps: const EasyDayProps(
-                                      landScapeMode: false,
-                                      width: 100,
-                                      todayHighlightColor: Colors.red),
-                                  onDateChange: (selectedDate) {
-                                    log(selectedDate.toString());
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
+                                const Divider(),
+                                Consumer2<Controller, DBController>(builder:
+                                    (context, checkBoxControler, dbController,
+                                        child) {
+                                  return Expanded(
+                                    child: ListView.separated(
+                                        itemBuilder: (context, index) {
+                                          return CheckboxListTile(
+                                              title: Text(
+                                                Controller
+                                                    .expenseCategory[index],
+                                                style: CustomeTextStyle
+                                                    .poppinsStyle(
+                                                        fontSize: 18,
+                                                        fontWeight:
+                                                            FontWeight.w600),
+                                              ),
+                                              value: checkBoxControler
+                                                  .isCheckBoxEnabled[index],
+                                              onChanged: (v) {
+                                                checkBoxControler
+                                                    .isCheckBoxSelected(
+                                                        v!,
+                                                        index,
+                                                        Controller
+                                                                .expenseCategory[
+                                                            index]);
+                                                dbController.filterList(
+                                                    checkBoxControler
+                                                        .selectedForFilter);
+                                              });
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return const SizedBox(
+                                            height: 20,
+                                          );
+                                        },
+                                        itemCount:
+                                            Controller.expenseCategory.length),
+                                  );
+                                })
                               ],
                             ),
                           ),
@@ -164,6 +231,22 @@ class ExpenseViewTab extends StatelessWidget {
       ),
     );
   }
+
+  Widget customeRadioButton(
+      {required String title,
+      required int value,
+      required void Function(Object?)? onChanged,
+      required groupedValue}) {
+    return RadioListTile(
+        title: Text(
+          title,
+          style: CustomeTextStyle.poppinsStyle(
+              fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        value: value,
+        groupValue: groupedValue,
+        onChanged: onChanged);
+  }
 }
 
 // ignore: must_be_immutable
@@ -190,11 +273,11 @@ class ListviewBuilder extends StatelessWidget {
               child: CircularProgressIndicator.adaptive(),
             );
           }
-          final data = dbController.expenceList;
+          final data = dbController.newListAfterchange.isEmpty
+              ? dbController.expenceList
+              : dbController.newListAfterchange;
           return data.isEmpty
-              ? const Center(
-                  child: Text("No Data"),
-                )
+              ? ShowEmptyView()
               : ListView.separated(
                   itemBuilder: (context, index) {
                     return Container(
@@ -214,14 +297,15 @@ class ListviewBuilder extends StatelessWidget {
                                   .selectImage(data[index].category),
                             ),
                             title: Text(
-                              data[index].category,
+                              "${data[index].category}",
                               style: const TextStyle(
                                   fontSize: 19, fontWeight: FontWeight.w600),
                             ),
                             subtitle: Text(
-                              data[index].description,
+                              data[index].date,
                               style: const TextStyle(
-                                fontWeight: FontWeight.w500,
+                                color: Colors.grey,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
                             trailing: Text("₹${data[index].amount}",
@@ -238,7 +322,7 @@ class ListviewBuilder extends StatelessWidget {
                               selectedCategory = data[index].category;
                               descriptionController.text =
                                   data[index].description;
-                              
+
                               showDialog(
                                 context: context,
                                 builder: (context) {
@@ -280,7 +364,7 @@ class ListviewBuilder extends StatelessWidget {
                                                       controller.resetDate();
                                                       ToastMessage.successToast(
                                                           context,
-                                                          "Succesful !");
+                                                          "Updated Succesful !");
                                                       Navigator.of(context)
                                                           .pop();
                                                     });
@@ -300,7 +384,6 @@ class ListviewBuilder extends StatelessWidget {
                                                               FontWeight.w600),
                                                 ));
                                           }),
-                                        
                                           Form(
                                             key: _formKey,
                                             child: SingleChildScrollView(
@@ -391,7 +474,9 @@ class ListviewBuilder extends StatelessWidget {
                                 },
                               );
                             } else {
-                              dbController.deleteFromBox(data[index].id);
+                              dbController.deleteFromBox(data[index].id).then(
+                                  (value) => ToastMessage.warningToast(
+                                      context, "Deleted !"));
                             }
                           },
                           itemBuilder: (context) => popUpItem

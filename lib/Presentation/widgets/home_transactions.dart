@@ -1,9 +1,15 @@
 import 'package:expensetracker/Data/db_controller.dart';
-import 'package:expensetracker/UI/controller/controller.dart';
-import 'package:expensetracker/UI/widgets/re-usable/colors.dart';
+import 'package:expensetracker/Presentation/controller/controller.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/colors.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/empty_data.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/responsive_helper.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/styles.dart';
+import 'package:expensetracker/Presentation/widgets/re-usable/textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeTransactions extends StatelessWidget {
   const HomeTransactions({
@@ -25,14 +31,12 @@ class HomeTransactions extends StatelessWidget {
               final data = dbController.expenceList;
               return Expanded(
                   child: data.isEmpty
-                      ? const Center(
-                          child: Text("No Data"),
-                        )
+                      ? ShowEmptyView()
                       : ListView.separated(
                           itemBuilder: (context, index) {
                             return ListTile(
                               leading: CircleAvatar(
-                                  maxRadius: 30,
+                                  maxRadius: 35,
                                   backgroundColor: Controller()
                                       .bgColor(data[index].category),
                                   child: Controller()
