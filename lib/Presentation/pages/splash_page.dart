@@ -20,7 +20,7 @@ class SplashPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "E.Trakker",
+              "E.TRACKER",
               style: GoogleFonts.bebasNeue(
                   fontSize: 50, letterSpacing: 2, fontWeight: FontWeight.w500),
             ),
